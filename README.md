@@ -1,2 +1,6 @@
 # combat_simulator
 a funny and simple combat simulator between 2 fighters, per example: swordman vs swordman...
+
+##Intructions.
+The simulator is just in one language, but to run just run webserver.py
+and open localhost:5000/ in you browser...
