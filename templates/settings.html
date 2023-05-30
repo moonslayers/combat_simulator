@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combat Engine 0.012</title>
+    <style>
+        body {
+            background-image: url('static/background.jpg');
+            background-size: cover;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: white;
+            font-size: 32px;
+            padding-top: 100px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .checkbox-label {
+            color: white;
+            font-size: 16px;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .checkbox {
+            margin: 10px;
+        }
+
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/css/custom.css">
+</head>
+<body>
+    <h1>Combat Engine 0.012</h1>
+    <form id="myForm" action="/settings_update" method="POST">  
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <h1>Ajustes</h1>
+            <form>
+              <div class="mb-3">
+                <h5><span class="badge bg-primary align-self-center">Ajustar Entropia (1-10)</span></h5>
+                <input type="range" class="form-range" min="1" max="10" value={{data.entr}} id="entr">
+              </div>
+              <div class="mb-3">
+                <h5><span class="badge bg-primary align-self-center">Resistencia a la perdida de Sangre (10%-60%)</span></h5>
+                <input type="range" class="form-range" min="10" max="60" value={{data.dblood}} id="dblood">
+              </div>
+              <div class="mb-3">
+                <h5><span class="badge bg-primary align-self-center">Durabilidad de la armadura(%)</span></h5>
+                <input type="range" class="form-range" min="1" max="100" value={{data.darmor}} id="darmor">
+              </div>
+              <div class="mb-3">
+                <h5><span class="badge bg-primary align-self-center">Iteraciones 1-1000</span></h5>
+                <input type="range" class="form-range" min="1" max="1000" value={{data.it}} id="it">
+              </div>
+              <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  <!-- Agrega aquí los enlaces a los archivos JS de Bootstrap -->
+
+</body>
+</html>
+
+<script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evitar el envío del formulario por defecto
+
+        var entr = document.getElementById("entr").value;
+        var dblood = document.getElementById("dblood").value;
+        var darmor = document.getElementById("darmor").value;
+        var it = document.getElementById("it").value;
+
+        var formData = new FormData();
+        formData.append("entr", entr);
+        formData.append("dblood", dblood);
+        formData.append("darmor", darmor);
+        formData.append("it", it);
+
+        fetch("/settings_update", {
+            method: "POST",
+            body: formData
+        })
+        .then(function(response) {
+            // Manejar la respuesta del servidor
+            if (response.ok) {
+                window.location.href = "/";
+            } else {
+                window.location.href = "/error";
+            }
+        })
+        .catch(function(error) {
+            // Manejar errores
+            console.error(error);
+        });
+    });
+</script>

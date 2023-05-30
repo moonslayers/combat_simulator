@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combat Engine 0.012</title>
+    <style>
+        body {
+            background-image: url('static/background.jpg');
+            background-size: cover;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: white;
+            font-size: 32px;
+            padding-top: 100px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .checkbox-label {
+            color: white;
+            font-size: 16px;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .checkbox {
+            margin: 10px;
+        }
+
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Combat Engine 0.012</h1>
+
+    <form id="myForm" action="/check1" method="POST">
+        <div>
+            <button type="submit" class="button">Configurar peleador 1</button>
+
+            <label class="checkbox-label"><input id="myCheckbox1" type="checkbox" class="checkbox"> Inicializar con valores aleatorios</label>
+        </div>
+    </form>
+
+    <form id="myForm2" action="/check2" method="POST">
+        <div>
+            <button type="submit" class="button">Configurar peleador 2</button>
+
+            <label class="checkbox-label"><input id="myCheckbox2" type="checkbox" class="checkbox"> Inicializar con valores aleatorios</label>
+        </div>
+    </form>
+
+    <div>
+        <a href="/settings" class="button">Ajustar parámetros de simulación</a>
+    </div>
+
+    <div>
+        <a href="/run" class="button">Iniciar simulación</a>
+    </div>
+</body>
+</html>
+
+
+<script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evitar el envío del formulario por defecto
+
+        var checkboxValue = document.getElementById("myCheckbox1").checked;
+
+        var formData = new FormData();
+        formData.append("checkboxValue", checkboxValue);
+
+        fetch("/check1", {
+            method: "POST",
+            body: formData
+        })
+        .then(function(response) {
+            // Manejar la respuesta del servidor
+            if (response.ok) {
+                window.location.href = "/combat1";
+            } else {
+                window.location.href = "/error";
+            }
+        })
+        .catch(function(error) {
+            // Manejar errores
+            console.error(error);
+        });
+    });
+
+    document.getElementById("myForm2").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evitar el envío del formulario por defecto
+
+        var checkboxValue = document.getElementById("myCheckbox2").checked;
+
+        var formData = new FormData();
+        formData.append("checkboxValue", checkboxValue);
+
+        fetch("/check2", {
+            method: "POST",
+            body: formData
+        })
+        .then(function(response) {
+            // Manejar la respuesta del servidor
+            if (response.ok) {
+                window.location.href = "/combat2";
+            } else {
+                window.location.href = "/error";
+            }
+        })
+        .catch(function(error) {
+            // Manejar errores
+            console.error(error);
+        });
+    });
+</script>

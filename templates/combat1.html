@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario</title>
+    <style>
+        body {
+            background-image: url('static/background.jpg');
+            background-size: cover;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: white;
+            font-size: 32px;
+            padding-top: 50px;
+        }
+    </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/assets/css/custom.css">
+
+<body>
+    <div class="container">
+        <h1>Ajustar combatiente</h1>
+    </div>
+
+    <div class="container text-center">
+        <form id="myForm" action="/update" method="POST">
+        <div class="row align-items-start">
+            <div class="col">
+                <h3><span class="badge bg-secondary align-self-center">Fisicos</span></h3>
+                <div class="form-field">
+                    <h5><span class="badge bg-primary align-self-center">Fuerza</span></h5>
+                    <input type="range" class="form-range" min="1" max="10" value={{data.fue}} id="fue">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-primary align-self-center">Agilidad</span></h5>
+                    <input type="range" class="form-range" min="1" max="10" value={{data.agi}} id="agi">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-primary align-self-center">Peso</span></h5>
+                    <input type="range" class="form-range" min="40" max="150" value={{data.peso}} id="pes">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-primary align-self-center">Resistencia</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.res}} id="res">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-primary align-self-center">Constitucion</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.cons}} id="cons">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-primary align-self-center">Clase de Armadura</span></h5>
+                    <input type="range" class="form-range" min="1" max="9" value={{data.arm}} id="arm">
+                </div>
+            </div>
+            <div class="col">
+                <h3><span class="badge bg-secondary align-self-center">Mentales</span></h3>
+                <div class="form-field">
+                    <h5><span class="badge bg-success">Reflejos</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.refle}} id="refle">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-success">Experiencia</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.exp}} id="exp">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-success">Estilo de lucha</span></h5>
+                    <select class="form-select" aria-label="Default select example" id="estilo">
+                        <option value="1" {{ 'selected' if data.estilo == 1 else '' }}>Ultra Defensivo</option>
+                        <option value="2" {{ 'selected' if data.estilo == 2 else '' }}>Defensivo</option>
+                        <option value="3" {{ 'selected' if data.estilo == 3 else '' }}>Neutral</option>
+                        <option value="4" {{ 'selected' if data.estilo == 4 else '' }}>Ofensivo</option>
+                        <option value="5" {{ 'selected' if data.estilo == 5 else '' }}>Ultra Ofensivo</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <h5><span class="badge bg-success">Vision</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.vis}} id="vis">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-success">Tecnica de lucha</span></h5>
+                    <select class="form-select" aria-label="Tecnica de lucha" id="tecnica">
+                        <option value="Espada" {{ 'selected' if data.tecnica == 'Espada' else '' }}>Espada</option>
+                        <option value="Espada y escudo" {{ 'selected' if data.tecnica == 'Espada y escudo' else '' }}>Espada y escudo</option>
+                        <option value="Hacha y escudo" {{ 'selected' if data.tecnica == 'Hacha y escudo' else '' }}>Hacha y escudo</option>
+                        <option value="Lanza y escudo" {{ 'selected' if data.tecnica == 'Lanza y escudo' else '' }}>Lanza y escudo</option>
+                        <option value="Dos espadas" {{ 'selected' if data.tecnica == 'Dos espadas' else '' }}>Dos espadas</option>
+                        <option value="Espada larga" {{ 'selected' if data.tecnica == 'Espada larga' else '' }}>Espada larga</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="col">
+                <h3><span class="badge bg-secondary align-self-center">No fisicos</span></h3>
+                <div class="form-field">
+                    <h5><span class="badge bg-warning">Inteligencia</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.int}} id="int">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-warning">Astucia</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.ast}} id="ast">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-warning">Sabiduria</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.sab}} id="sab">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-warning">Paciencia</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.pac}} id="pac">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-warning">Autocontrol</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.aut}} id="aut">
+                </div>
+            </div>
+            <div class="col">
+                <h3><span class="badge bg-secondary align-self-center">Psicologicos</span></h3>
+                <div class="form-field">
+                    <h5><span class="badge bg-danger">Moral</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.mor}} id="mor">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-danger">Confianza</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.conf}} id="conf">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-danger">Control Emocional</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.cone}} id="cone">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-danger">Adaptacion</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.ada}} id="ada">
+                </div>
+                <div class="form-field">
+                    <h5><span class="badge bg-danger">Concentracion</span></h5>
+                    <input type="range" class="form-range" min="0" max="10" value={{data.conc}} id="conc">
+                </div>
+                <input type="range" class="form-range" min="0" max="3" value={{data.c}} id="id" hidden>
+            </div>
+        </div>
+        <div class="col align-self-end">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evitar el envío del formulario por defecto
+
+        var formData = new FormData();
+        formData.append("fue", document.getElementById("fue").value);
+        formData.append("agi", document.getElementById("agi").value);
+        formData.append("peso", document.getElementById("pes").value);
+        formData.append("res", document.getElementById("res").value);
+        formData.append("cons", document.getElementById("cons").value);
+        formData.append("arm", document.getElementById("arm").value);
+        formData.append("tecnica", document.getElementById("tecnica").value);
+        formData.append("refle", document.getElementById("refle").value);
+        formData.append("exp", document.getElementById("exp").value);
+        formData.append("estilo", document.getElementById("estilo").value);
+        formData.append("vis", document.getElementById("vis").value);
+        formData.append("int", document.getElementById("int").value);
+        formData.append("ast", document.getElementById("ast").value);
+        formData.append("sab", document.getElementById("sab").value);
+        formData.append("pac", document.getElementById("pac").value);
+        formData.append("aut", document.getElementById("aut").value);
+        formData.append("mor", document.getElementById("mor").value);
+        formData.append("conf", document.getElementById("conf").value);
+        formData.append("cone", document.getElementById("cone").value);
+        formData.append("ada", document.getElementById("ada").value);
+        formData.append("conc", document.getElementById("conc").value);
+        formData.append("c", document.getElementById("id").value);
+
+        fetch("/update", {
+            method: "POST",
+            body: formData
+        })
+        .then(function(response) {
+            // Manejar la respuesta del servidor
+            if (response.ok) {
+                window.location.href = "/";
+            } else {
+                window.location.href = "/error";
+            }
+        })
+        .catch(function(error) {
+            // Manejar errores
+            console.error(error);
+        });
+    });
+</script>
